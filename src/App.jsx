@@ -1,13 +1,16 @@
-import Header from "./components/header/Header.jsx";
-import MmmmFoothehehe from "./components/footer/Footer.jsx";
-import Akootenkay1point8inches from "./components/manga/Manga.jsx";
+import Header from "./components/Header/Header.jsx";
+import Footer from "./components/Footer/Footer.jsx";
+import Manga from "./components/Manga/Manga.jsx";
+import Card from "./components/Card/Card.jsx";
 
 function App() {
   return (
     <>
       <Header />
-      <Akootenkay1point8inches />
-      <MmmmFoothehehe />
+      <Card />
+      <Card />
+      <Card />
+      <Footer />
     </>
   );
 }
