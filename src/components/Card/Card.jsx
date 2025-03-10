@@ -1,7 +1,7 @@
 import profilePic from "../assets/yunjincute.jpg";
 import styles from "./Card.module.css";
 
-function Card() {
+const Card = () => {
   return (
     <div className={styles.card}>
       {/*<img src={profilePic} alt="profile pciture "></img> */}
