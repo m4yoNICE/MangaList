@@ -1,4 +1,4 @@
-import profilePic from "../assets/yunjincute.jpg";
+import profilePic from "../pics/yunjincute.jpg";
 import styles from "./Card.module.css";
 
 function Card() {

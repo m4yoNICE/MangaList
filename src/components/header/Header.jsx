@@ -1,26 +1,26 @@
-function Header() {
-  return (
-    <header>
-      <h1>Mangananggal</h1>
-      <nav>
-        <ul>
-          <li>
-            <a href="#">Home</a>
-          </li>
-          <li>
-            <a href="#">About</a>
-          </li>
-          <li>
-            <a href="#">Services</a>
-          </li>
-          <li>
-            <a href="#">Contact</a>
-          </li>
-        </ul>
-      </nav>
-      <hr></hr>
-    </header>
-  );
-}
+import { useNavigate } from "react-router-dom";
+
+const Header = () => (
+  <header>
+    <h1>Mangananggal</h1>
+    <nav>
+      <ul>
+        <li>
+          <useNavigate to="/">Home</useNavigate>
+        </li>
+        <li>
+          <useNavigate to="/about">About</useNavigate>
+        </li>
+        <li>
+          <useNavigate to="#">Services</useNavigate>
+        </li>
+        <li>
+          <useNavigate to="#">Contact</useNavigate>
+        </li>
+      </ul>
+    </nav>
+    <hr />
+  </header>
+);
 
 export default Header;
