@@ -1,0 +1,40 @@
+.form {
+  max-width: 400px;
+  margin: auto;
+}
+
+.hiddenLabel {
+  display: none;
+}
+
+.relativeContainer {
+  position: relative;
+}
+
+.iconContainer {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+}
+
+.input {
+  width: 100%;
+  padding: 10px 10px 10px 35px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.button {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: blue;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}

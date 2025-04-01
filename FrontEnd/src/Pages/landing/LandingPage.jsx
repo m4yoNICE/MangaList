@@ -1,17 +1,15 @@
-import { useNavigate } from "react-router-dom";
+import Card from "../../components/assets/Card/Card.jsx";
+import Search from "../../components/assets/SearchBar/SearchBar.jsx";
 
 const LandingPage = () => {
-  const navigate = useNavigate();
-
   return (
     <>
-      <header>
-        <button onClick={() => navigate("/register")}>Sign In</button>
-        <button onClick={() => navigate("/login")}>Log In</button>
-      </header>
-      <h1>Welcome to Mangananggal</h1>
-      <h2>The Manga List App</h2>
-      <h3>omg</h3>
+      <main>
+        <Search />
+        <h1>Welcome to Mangananggal</h1>
+        <h2>The Manga List App</h2>
+        <Card />
+      </main>
     </>
   );
 };

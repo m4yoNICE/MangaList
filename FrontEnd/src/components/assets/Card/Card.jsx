@@ -1,25 +1,46 @@
-import profilePic from "../pics/yunjincute.jpg";
+import { useEffect, useState } from "react";
 import styles from "./Card.module.css";
+import Api from "../../../services/Api";
 
-function Card() {
+const Card = () => {
+  const [manga, setManga] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    Api.getManga(controller)
+      .then((response) => {
+        if (response.data.data.length > 0) {
+          setManga(response.data.data[0]); // Fetch the first manga entry
+        }
+        setLoading(false);
+      })
+      .catch((err) => {
+        if (err.name !== "AbortError") {
+          setError("Failed to fetch manga data.");
+          setLoading(false);
+        }
+      });
+    return () => controller.abort();
+  });
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>failed</p>;
+
   return (
     <div className={styles.card}>
-      {/*<img src={profilePic} alt="profile pciture "></img> */}
       <img
         className={styles.cardImage}
-        src="https://preview.redd.it/yunjin-by-%E3%81%BD%E3%81%88-v0-zeqxfmxsf9ne1.jpeg?width=1080&crop=smart&auto=webp&s=292e86b2229a01050d94a60678470c9186aeca22"
-        alt="profile pciture "
-      ></img>
-      <h2 className={styles.cardTitle}>Yun Jin</h2>
+        src={manga.images.jpg.image_url}
+        alt={manga.title}
+      />
+      <h2 className={styles.cardTitle}>{manga.title}</h2>
       <p className={styles.cardText}>
-        A famous figure in Liyue Harbor's opera scene, Yun Jin is the director
-        of the Yun-Han Opera Troupe, and performs at Heyu Tea House from time to
-        time. She is also a playwright, having written all the plays the Yun-Han
-        Opera Troupe has performed in recent years, including a new ending for
-        "The Divine Damsel of Devastation."
+        {manga.synopsis || "No synopsis available."}
       </p>
     </div>
   );
-}
+};
 
 export default Card;
