@@ -1,0 +1,65 @@
+const axios = require("axios");
+
+const baseUrl = "https://api.mangadex.org";
+
+async function getMangaImageUrl(mangaId, coverRelId) {
+  try {
+    const resp = await axios.get(`${baseUrl}/cover/${coverRelId}`);
+    const fileName = resp.data.data.attributes.fileName;
+    return `https://uploads.mangadex.org/covers/${mangaId}/${fileName}`;
+  } catch (error) {
+    console.error("Error fetching cover art:", error);
+    return "No image available";
+  }
+}
+
+async function getAuthorName(authorRelId) {
+  try {
+    const resp = await axios.get(`${baseUrl}/author/${authorRelId}`);
+    return resp.data.data.attributes.name;
+  } catch (error) {
+    console.error("Error fetching author:", error);
+    return "Unknown";
+  }
+}
+
+const fetchMangaDetailsByTitle = async (title) => {
+  try {
+    const resp = await axios.get(`${baseUrl}/manga`, {
+      params: { title: title },
+    });
+    const mangaDetails = await Promise.all(
+      resp.data.data.map(async (manga) => {
+        const coverArtRel = manga.relationships.find(
+          (rel) => rel.type === "cover_art"
+        );
+        const authorRel = manga.relationships.find(
+          (rel) => rel.type === "author"
+        );
+
+        const imgUrl = coverArtRel?.id
+          ? await getMangaImageUrl(manga.id, coverArtRel.id)
+          : "No image available";
+
+        const author = authorRel?.id
+          ? await getAuthorName(authorRel.id)
+          : "Unknown";
+
+        return {
+          id: manga.id,
+          title: manga.attributes.title.en,
+          author: author,
+          description:
+            manga.attributes.description.en || "No description available",
+          imgUrl: imgUrl,
+        };
+      })
+    );
+    return mangaDetails;
+  } catch (error) {
+    console.error("Error fetching manga details:", error);
+    return [];
+  }
+};
+
+module.exports = { fetchMangaDetailsByTitle };

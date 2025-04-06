@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const mangaController = require("../controllers/mangaController");
 
+//Read External Operations
+router.get("/search", mangaController.getExternalMangaDetails);
 // Read operations
 router.get("/", mangaController.getAllManga);
 router.get("/:id", mangaController.getMangaById);
