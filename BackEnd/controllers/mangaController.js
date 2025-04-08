@@ -7,7 +7,11 @@ const {
 // GET /api/manga/search
 exports.getExternalMangaDetails = async (req, res) => {
   try {
-    const title = "Kanojyo to Himitsu to Koimoyou"; // Hardcoded title
+    const { title } = req.query;
+    if (!title) {
+      return res.status(400).json({ error: "Title is required" });
+    }
+
     const mangaDetails = await fetchMangaDetailsByTitle(title);
     res.json({ mangaDetails });
   } catch (error) {

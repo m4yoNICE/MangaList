@@ -1,13 +1,31 @@
-import Card from "../components/assets/Card/Card.jsx";
+import React, { useState } from "react";
+import SearchBar from "../components/assets/SearchBar/SearchBar.jsx"; // Your search bar component
+import Card from "../components/assets/Card/Card.jsx"; // Component for displaying a manga card
+import Header from "../components/header/Header.jsx";
+import Footer from "../components/Footer/Footer.jsx";
 
 const Home = () => {
+  const [mangaList, setMangaList] = useState([]);
+
+  const handleSearchResults = (results) => {
+    setMangaList(results);
+  };
+
   return (
-    <div>
-      <h2>Welcome to Home Page</h2>
-      <Card />
-      <Card />
-      <Card />
-    </div>
+    <>
+      <Header />
+      <main>
+        <SearchBar onResults={handleSearchResults} />
+        <div>
+          {mangaList.length > 0 ? (
+            mangaList.map((manga) => <Card key={manga.id} manga={manga} />)
+          ) : (
+            <p>No results found.</p>
+          )}
+        </div>
+      </main>
+      <Footer />
+    </>
   );
 };
 
