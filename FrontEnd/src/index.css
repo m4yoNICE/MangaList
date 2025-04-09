@@ -1,0 +1,7 @@
+body {
+  background-color: black;
+  color: white; /* Ensure text is readable */
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}

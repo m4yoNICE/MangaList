@@ -1,4 +1,4 @@
-import Card from "../components/assets/Card/Card.jsx";
+import Card from "../components/assets/Card/MangaCard.jsx";
 
 const MyList = () => {
   return <></>;

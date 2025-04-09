@@ -1,51 +1,60 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  IconButton,
+  Box,
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
+import Logo from "./mangananggal-logo.svg"; // Optional logo
+import SearchBar from "../assets/SearchBar/SearchBar.jsx"; // Your SearchBar component
 
-const Header = () => {
+const Header = ({ onResults }) => {
   const navigate = useNavigate();
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [searchResults, setSearchResults] = useState([]);
+
+  const handleSearchResults = (results) => {
+    setSearchResults(results);
+    if (onResults) {
+      onResults(results); // Pass the results to the parent component (App.jsx)
+    }
+  };
 
   return (
-    <nav style={{ backgroundColor: "#333" }}>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          style={{
-            background: "none",
-            border: "none",
-            cursor: "pointer",
-            color: "white",
-          }}
-        ></button>
-
-        <div>
-          <button onClick={() => navigate("/")} style={buttonStyle}>
-            Home
-          </button>
-          <button onClick={() => navigate("/about")} style={buttonStyle}>
-            About
-          </button>
-          <button style={buttonStyle}>Services</button>
-          <button style={buttonStyle}>Contact</button>
+    <AppBar position="static" sx={{ backgroundColor: "#333" }}>
+      <Toolbar sx={{ justifyContent: "space-between", alignItems: "center" }}>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <IconButton edge="start" color="inherit" sx={{ mr: 2 }}>
+            <MenuIcon />
+          </IconButton>
+          {Logo && (
+            <img
+              src={Logo}
+              alt="Logo"
+              style={{ width: 40, height: 40, marginRight: 10 }}
+              id="header-logo"
+            />
+          )}
         </div>
-      </div>
-    </nav>
-  );
-};
 
-const buttonStyle = {
-  backgroundColor: "#555",
-  color: "white",
-  padding: "10px 15px",
-  border: "none",
-  margin: "0 5px",
-  cursor: "pointer",
+        <div id="search-bar-container">
+          <SearchBar onResults={handleSearchResults} />
+        </div>
+
+        <div id="header-buttons">
+          <Button color="inherit" onClick={() => navigate("/")}>
+            Home
+          </Button>
+          <Button color="inherit" onClick={() => navigate("/about")}>
+            About
+          </Button>
+        </div>
+      </Toolbar>
+    </AppBar>
+  );
 };
 
 export default Header;

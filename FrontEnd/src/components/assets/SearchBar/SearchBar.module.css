@@ -1,40 +1,32 @@
-.form {
-  max-width: 400px;
-  margin: auto;
+.searchForm {
+  display: flex;
+  align-items: center;
+  margin: 16px;
 }
 
-.hiddenLabel {
-  display: none;
-}
-
-.relativeContainer {
-  position: relative;
-}
-
-.iconContainer {
-  position: absolute;
-  top: 50%;
-  left: 10px;
-  transform: translateY(-50%);
-}
-
-.input {
+.inputField {
+  margin-right: 8px;
+  background-color: #d9d9d9; /* Background color */
+  color: black; /* Text color */
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
   width: 100%;
-  padding: 10px 10px 10px 35px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
 }
 
 .button {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: blue;
-  color: white;
+  background-color: #ed2553; /* Green background */
+  color: white; /* White text */
+  padding: 10px 20px;
   border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease; /* Smooth transition for color change */
+}
+
+.button:hover {
+  opacity: 0.7;
 }

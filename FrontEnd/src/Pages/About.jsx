@@ -1,6 +1,6 @@
 import Header from "../components/header/Header.jsx";
 import Footer from "../components/Footer/Footer.jsx";
-import Card from "../components/assets/Card/Card.jsx";
+import Card from "../components/assets/Card/MangaCard.jsx";
 
 const About = () => {
   return (

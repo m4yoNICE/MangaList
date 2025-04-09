@@ -1,6 +1,9 @@
 import { useState, useRef } from "react";
 import axios from "axios";
 import styles from "./SearchBar.module.css";
+import { TextField, Button, Box, CircularProgress } from "@mui/material";
+import { IconButton } from "@mui/material";
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 
 const SearchBar = ({ onResults }) => {
   const inputRef = useRef();
@@ -26,20 +29,18 @@ const SearchBar = ({ onResults }) => {
   };
 
   return (
-    <div className={styles.searchBar}>
-      <form onSubmit={handleSubmit} className={styles.form}>
+    <div>
+      <form onSubmit={handleSubmit} className={styles.searchForm}>
         <input
           ref={inputRef}
           type="search"
-          placeholder="Search Mangas"
-          className={styles.input}
+          className={styles.inputField}
           required
         />
         <button type="submit" className={styles.button}>
-          Search Manga
+          {loading ? <span>Loading...</span> : <SearchOutlinedIcon />}
         </button>
       </form>
-      {loading && <p>Loading...</p>}
     </div>
   );
 };
