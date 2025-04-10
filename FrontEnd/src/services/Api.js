@@ -1,9 +1,30 @@
-// src/services/Api.js
 import Http from "./Http";
 
-const getManga = (controller) => {
-  // Update the path to match your Vite proxy
-  return Http.get("/api/manga/search", { signal: controller?.signal });
+const getManga = (title, controller) => {
+  return Http.get(`/api/manga/search?title=${encodeURIComponent(title)}`, {
+    signal: controller?.signal,
+  });
 };
 
-export default { getManga };
+const getAllSavedManga = (controller) => {
+  return Http.get("/api/manga", { signal: controller?.signal });
+};
+
+const createManga = (controller) => {
+  return Http.post("/api/manga", { signal: controller?.signal });
+};
+
+const deleteManga = (id, controller) => {
+  return Http.delete("/api/manga/${id}", { signal: controller?.signal });
+};
+
+const updateManga = (id, controller) => {
+  return Http.put("/api/manga/${id}", { signal: controller?.signal });
+};
+export default {
+  getManga,
+  getAllSavedManga,
+  createManga,
+  deleteManga,
+  updateManga,
+};

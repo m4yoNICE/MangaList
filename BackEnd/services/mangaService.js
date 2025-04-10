@@ -1,4 +1,5 @@
 const axios = require("axios");
+const db = require("../config/db");
 
 const baseURL = "https://api.mangadex.org/manga";
 

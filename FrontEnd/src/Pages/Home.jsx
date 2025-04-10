@@ -1,11 +1,18 @@
-import React from "react";
-import Card from "../components/assets/Card/MangaCard.jsx"; // Component for displaying a manga card
-import Footer from "../components/Footer/Footer.jsx";
+import React, { useState } from "react";
+import Card from "../components/assets/Card/MangaCard.jsx";
+import SearchBar from "../components/assets/SearchBar/SearchBar.jsx";
 
-const Home = ({ mangaList }) => {
+const Home = () => {
+  const [mangaList, setMangaList] = useState([]);
+
+  const handleSearchResults = (results) => {
+    setMangaList(results);
+  };
+
   return (
     <>
       <main>
+        <SearchBar onResults={handleSearchResults} />
         <div>
           {mangaList.length > 0 ? (
             mangaList.map((manga) => <Card key={manga.id} manga={manga} />)

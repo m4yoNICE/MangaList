@@ -67,6 +67,7 @@ exports.createManga = async (req, res) => {
   }
 };
 
+
 // PUT /api/manga/:id - Update a manga in the database
 exports.updateManga = async (req, res) => {
   try {

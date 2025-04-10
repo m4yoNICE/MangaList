@@ -16,13 +16,6 @@ const Header = ({ onResults }) => {
   const navigate = useNavigate();
   const [searchResults, setSearchResults] = useState([]);
 
-  const handleSearchResults = (results) => {
-    setSearchResults(results);
-    if (onResults) {
-      onResults(results); // Pass the results to the parent component (App.jsx)
-    }
-  };
-
   return (
     <AppBar position="static" sx={{ backgroundColor: "#333" }}>
       <Toolbar sx={{ justifyContent: "space-between", alignItems: "center" }}>
@@ -38,10 +31,6 @@ const Header = ({ onResults }) => {
               id="header-logo"
             />
           )}
-        </div>
-
-        <div id="search-bar-container">
-          <SearchBar onResults={handleSearchResults} />
         </div>
 
         <div id="header-buttons">

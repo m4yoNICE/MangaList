@@ -1,8 +1,6 @@
 import { useState, useRef } from "react";
-import axios from "axios";
+import Api from "../../../services/Api.js";
 import styles from "./SearchBar.module.css";
-import { TextField, Button, Box, CircularProgress } from "@mui/material";
-import { IconButton } from "@mui/material";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 
 const SearchBar = ({ onResults }) => {
@@ -15,11 +13,11 @@ const SearchBar = ({ onResults }) => {
     if (!query) return;
 
     setLoading(true);
+    const controller = new AbortController();
+
     try {
-      const resp = await axios.get(
-        `/api/manga/search?title=${encodeURIComponent(query)}`
-      );
-      onResults(resp.data.mangaDetails); // adjust if your API returns differently
+      const resp = await Api.getManga(query, controller);
+      onResults(resp.data.mangaDetails);
     } catch (error) {
       console.error("Error fetching manga details:", error);
       onResults([]);
