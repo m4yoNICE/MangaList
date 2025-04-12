@@ -7,6 +7,5 @@ CREATE TABLE manga (
     title VARCHAR(255) NOT NULL,
     author VARCHAR(255),
     description TEXT,
-    genres VARCHAR(255),
     imageUrl VARCHAR(255)
 );

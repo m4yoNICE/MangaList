@@ -2,10 +2,14 @@
 import React from "react";
 import styles from "./MangaCard.module.css";
 
-const MangaCard = ({ manga, isSaved, onSaveToggle }) => {
+const SavedMangaCard = ({ manga, isSaved, onSaveToggle }) => {
   return (
     <div className={styles.card}>
-      <img src={manga.imgUrl} alt={manga.title} className={styles.cardImage} />
+      <img
+        src={manga.imageUrl}
+        alt={manga.title}
+        className={styles.cardImage}
+      />
       <div className={styles.cardContent}>
         <h2 className={styles.cardTitle}>{manga.title}</h2>
         <p className={styles.cardText}>
@@ -16,18 +20,15 @@ const MangaCard = ({ manga, isSaved, onSaveToggle }) => {
         </p>
       </div>
       <div className={styles.cardActions}>
-        {isSaved ? (
-          <button className={styles.button} onClick={() => onSaveToggle(manga.id)}>
-            Unsave
-          </button>
-        ) : (
-          <button className={styles.button} onClick={() => onSaveToggle(manga.id)}>
-            Save To List
-          </button>
-        )}
+        <button className={styles.button} onClick={() => onEdit(manga.id)}>
+          Edit
+        </button>
+        <button className={styles.button} onClick={() => onDelete(manga.id)}>
+          Delete
+        </button>
       </div>
     </div>
   );
 };
 
-export default MangaCard;
+export default SavedMangaCard;

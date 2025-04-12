@@ -10,12 +10,9 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
 import Logo from "./mangananggal-logo.svg"; // Optional logo
-import SearchBar from "../assets/SearchBar/SearchBar.jsx"; // Your SearchBar component
 
-const Header = ({ onResults }) => {
+const Header = () => {
   const navigate = useNavigate();
-  const [searchResults, setSearchResults] = useState([]);
-
   return (
     <AppBar position="static" sx={{ backgroundColor: "#333" }}>
       <Toolbar sx={{ justifyContent: "space-between", alignItems: "center" }}>
@@ -36,6 +33,9 @@ const Header = ({ onResults }) => {
         <div id="header-buttons">
           <Button color="inherit" onClick={() => navigate("/")}>
             Home
+          </Button>
+          <Button color="inherit" onClick={() => navigate("/myList")}>
+            My List
           </Button>
           <Button color="inherit" onClick={() => navigate("/about")}>
             About
