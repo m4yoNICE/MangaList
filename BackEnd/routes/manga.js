@@ -5,9 +5,6 @@ const mangaController = require("../controllers/mangaController");
 // Read External Operations
 router.get("/search", mangaController.getExternalMangaDetails);
 
-
-
-
 // Read operations
 router.get("/", mangaController.getAllManga); // Only one GET for /
 
@@ -16,7 +13,7 @@ router.get("/", mangaController.getAllManga); // Only one GET for /
 
 // // // Write operations
 router.post("/", mangaController.createManga); // POST /api/manga
-// // router.put("/:id", mangaController.updateManga); // PUT /api/manga/:id
-// // router.delete("/:id", mangaController.deleteManga); // DELETE /api/manga/:id
+router.put("/:id", mangaController.updateManga); // PUT /api/manga/:id
+router.delete("/:id", mangaController.deleteManga); // DELETE /api/manga/:id
 
 module.exports = router;

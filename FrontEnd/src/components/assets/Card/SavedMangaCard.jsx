@@ -1,8 +1,7 @@
-// src/components/assets/Card/MangaCard.jsx
 import React from "react";
 import styles from "./MangaCard.module.css";
 
-const SavedMangaCard = ({ manga, isSaved, onSaveToggle }) => {
+const SavedMangaCard = ({ manga, onDelete }) => {
   return (
     <div className={styles.card}>
       <img

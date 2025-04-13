@@ -44,65 +44,50 @@ exports.createManga = async (req, res) => {
   }
 };
 
-// // GET /api/manga/:id - Retrieve a specific manga by ID from the database
-// exports.createManga = (title, author, description, genres, imageUrl) => {
-//   return new Promise((resolve, reject) => {
-//     const sql =
-//       "INSERT INTO manga (title, author, description, genres, imageUrl) VALUES (?, ?, ?, ?, ?)";
-//     const values = [title, author, description, genres, imageUrl];
-//     db.query(sql, values, (err, result) => {
-//       if (err) {
-//         reject(err);
-//       } else {
-//         resolve(result.insertId);
-//       }
-//     });
-//   });
-// };
+// DELETE /api/manga - create a manga in the database
+exports.deleteManga = async (req, res) => {
+  const id = req.params.id;
+  const query = "DELETE FROM manga WHERE id = ?";
+  try {
+    await pool.query(query, id);
+    res.status(201).json({ message: "Manga added to list!" });
+  } catch (error) {
+    res.status(500).json({ error: "Error adding manga to list" });
+  }
+};
 
-// // PUT /api/manga/:id - Update a manga in the database
-// exports.updateManga = async (req, res) => {
-//   try {
-//     const id = req.params.id;
-//     const { title, author, description, genres, imageUrl } = req.body;
-//     const sql =
-//       "UPDATE manga SET title = ?, author = ?, description = ?, genres = ?, imageUrl = ? WHERE id = ?";
-//     const values = [title, author, description, genres, imageUrl, id];
+// PUT /api/manga/:id - Update a manga in the database
+//also di jd ko nako ni i butang sa frontend for a couple of reasons:
+/*  
+1) It doesnt make sense oh having to edit a data from an external API
+2) It loses data integrity 
+3) It loses any meaning of having an external API when
+  you're gonna change it anyways
+4) Kapoy
+5) Walay time
+6) Di ko ka make sense unsay flow sa i edit ang data sa card
+7) Kay miss nako siya nya di ko gusto ako siya ibiya 🥺🥺🥺🥺🥺
+*/
+exports.updateManga = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const { title, author, description, genres, imageUrl } = req.body;
+    const sql =
+      "UPDATE manga SET title = ?, author = ?, description = ?, genres = ?, imageUrl = ? WHERE id = ?";
+    const values = [title, author, description, genres, imageUrl, id];
 
-//     db.query(sql, values, (err, result) => {
-//       if (err) {
-//         console.error("Error updating manga:", err);
-//         return res.status(500).json({ error: "Failed to update manga" });
-//       }
-//       if (result.affectedRows === 0) {
-//         return res.status(404).json({ error: "Manga not found" });
-//       }
-//       res.json({ message: "Manga updated" });
-//     });
-//   } catch (error) {
-//     console.error("Error in updateManga:", error);
-//     res.status(500).json({ error: "Failed to update manga" });
-//   }
-// };
-
-// // DELETE /api/manga/:id - Delete a manga from the database
-// exports.deleteManga = async (req, res) => {
-//   try {
-//     const id = req.params.id;
-//     const sql = "DELETE FROM manga WHERE id = ?";
-
-//     db.query(sql, [id], (err, result) => {
-//       if (err) {
-//         console.error("Error deleting manga:", err);
-//         return res.status(500).json({ error: "Failed to delete manga" });
-//       }
-//       if (result.affectedRows === 0) {
-//         return res.status(404).json({ error: "Manga not found" });
-//       }
-//       res.json({ message: "Manga deleted" });
-//     });
-//   } catch (error) {
-//     console.error("Error in deleteManga:", error);
-//     res.status(500).json({ error: "Failed to delete manga" });
-//   }
-// };
+    db.query(sql, values, (err, result) => {
+      if (err) {
+        console.error("Error updating manga:", err);
+        return res.status(500).json({ error: "Failed to update manga" });
+      }
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ error: "Manga not found" });
+      }
+      res.json({ message: "Manga updated" });
+    });
+  } catch (error) {
+    console.error("Error in updateManga:", error);
+    res.status(500).json({ error: "Failed to update manga" });
+  }
+};

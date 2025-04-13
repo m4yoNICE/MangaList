@@ -17,7 +17,9 @@ const createManga = (mangaData, controller) => {
 };
 
 const deleteManga = (id, controller) => {
-  return Http.delete("/api/manga/" + id, { signal: controller?.signal });
+  return Http.delete("/api/manga/" + id, {
+    signal: controller?.signal,
+  });
 };
 
 const updateManga = (id, controller) => {
