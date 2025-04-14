@@ -1,9 +1,10 @@
 import Http from "./Http";
 
-const getManga = (title, controller) => {
-  return Http.get(`/api/manga/search?title=${encodeURIComponent(title)}`, {
-    signal: controller?.signal,
-  });
+const getManga = (title = "") => {
+  if (title.trim() === "") {
+    return Http.get("/api/manga/search");
+  }
+  return Http.get(`/api/manga/search?title=${encodeURIComponent(title)}`); // Search by title if provided
 };
 
 const getAllSavedManga = (controller) => {

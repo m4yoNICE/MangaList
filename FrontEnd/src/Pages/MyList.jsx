@@ -7,7 +7,6 @@ const MyList = () => {
 
   const fetchManga = async (controller) => {
     try {
-      console.log("useEffect triggered for MyList");
       const res = await Api.getAllSavedManga(controller);
       console.log("Fetched data:", res.data);
       setMangaList(res.data);
@@ -24,6 +23,7 @@ const MyList = () => {
     const controller = new AbortController();
     try {
       await Api.deleteManga(id, controller);
+      alert("Manga deleted successfully!");
       console.log("Manga Removed!");
       fetchManga(controller);
     } catch (error) {

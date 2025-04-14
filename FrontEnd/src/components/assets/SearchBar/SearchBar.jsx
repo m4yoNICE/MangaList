@@ -3,39 +3,19 @@ import Api from "../../../services/Api.js";
 import styles from "./SearchBar.module.css";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 
-const SearchBar = ({ onResults }) => {
+const SearchBar = ({ onSearch, loading }) => {
   const inputRef = useRef();
-  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const query = inputRef.current.value;
-    if (!query) return;
-
-    setLoading(true);
-    const controller = new AbortController();
-
-    try {
-      const resp = await Api.getManga(query, controller);
-      onResults(resp.data.mangaDetails);
-    } catch (error) {
-      console.error("Error fetching manga details:", error);
-      onResults([]);
-    } finally {
-      setLoading(false);
-    }
+    onSearch(query);
   };
-
   return (
     <div>
       <form onSubmit={handleSubmit} className={styles.searchForm}>
-        <input
-          ref={inputRef}
-          type="search"
-          className={styles.inputField}
-          required
-        />
-        <button type="submit" className={styles.button}>
+        <input ref={inputRef} type="search" className={styles.inputField} />
+        <button className={styles.button} type="submit">
           {loading ? <span>Loading...</span> : <SearchOutlinedIcon />}
         </button>
       </form>

@@ -9,8 +9,10 @@ const {
 exports.getExternalMangaDetails = async (req, res) => {
   try {
     const { title } = req.query;
-    if (!title) {
-      return res.status(400).json({ error: "Title is required" });
+    //For When Opening the app
+    if (!title || title.trim() === "") {
+      const mangaDetails = await fetchMangaDetailsByTitle(title);
+      return res.json({ mangaDetails });
     }
 
     const mangaDetails = await fetchMangaDetailsByTitle(title);

@@ -1,23 +1,7 @@
 import React from "react";
 import styles from "./MangaCard.module.css";
-import Api from "../../../services/Api.js";
 
-const MangaCard = ({ manga }) => {
-  const SaveClick = async (e) => {
-    const controller = new AbortController();
-    const mangaData = {
-      title: manga.title,
-      author: manga.author,
-      description: manga.description,
-      imageUrl: manga.imgUrl,
-    };
-    try {
-      const resp = await Api.createManga(mangaData, controller);
-      console.log("Manga added to list!");
-    } catch (error) {
-      console.error("Error POST data:", error);
-    }
-  };
+const MangaCard = ({ manga, onSave }) => {
   return (
     <div className={styles.card}>
       <img src={manga.imgUrl} alt={manga.title} className={styles.cardImage} />
@@ -31,7 +15,7 @@ const MangaCard = ({ manga }) => {
         </p>
       </div>
       <div className={styles.cardActions}>
-        <button className={styles.button} onClick={SaveClick}>
+        <button className={styles.button} onClick={() => onSave(manga)}>
           Save To List
         </button>
       </div>
